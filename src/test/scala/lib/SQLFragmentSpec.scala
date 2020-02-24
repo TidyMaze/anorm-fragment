@@ -9,10 +9,10 @@ object SQLFragmentSpec extends Properties("SQLFragment") with Matchers {
   val runner = new SQLRunner()
 
   val dataGen = for {
-    before <- Gen.asciiPrintableStr
-    param <- Gen.asciiPrintableStr
-    after <- Gen.asciiPrintableStr
-    replacement <- Gen.asciiPrintableStr
+    before <- Gen.alphaStr
+    param <- Gen.alphaStr
+    after <- Gen.alphaStr
+    replacement <- Gen.alphaStr
   } yield (before, param, after, replacement)
 
   property("single replace") = forAll (dataGen) {
@@ -34,6 +34,6 @@ object SQLFragmentSpec extends Properties("SQLFragment") with Matchers {
       println()
     }
 
-    got == oracle
+    Seq(before, param, after, replacement).exists(_.contains("\u0000")) || got == oracle
   }
 }
