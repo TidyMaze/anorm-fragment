@@ -15,25 +15,25 @@ object SQLFragmentSpec extends Properties("SQLFragment") with Matchers {
     replacement <- Gen.alphaStr
   } yield (before, param, after, replacement)
 
-  property("single replace") = forAll (dataGen) {
+  property("single replace") = forAll(dataGen) {
     case (before: String, param: String, after: String, replacement: String) =>
 
-    val query = SQLFragment(before + param + after, Map(
-      param -> replacement,
-    ))
+      val query = SQLFragment(before + param + after, Map(
+        param -> replacement,
+      ))
 
-    val got = runner.run(query)
-    val oracle = before + replacement + after
-    if(got != oracle) {
-      print(got.map(_.toInt))
-      print(" vs ")
-      print(oracle.map(_.toInt))
-      print(" with input ")
-      print((before.map(_.toInt), param.map(_.toInt), after.map(_.toInt), replacement.map(_.toInt)))
+      val got = runner.run(query)
+      val oracle = before + replacement + after
+      if (got != oracle) {
+        print(got.map(_.toInt))
+        print(" vs ")
+        print(oracle.map(_.toInt))
+        print(" with input ")
+        print((before.map(_.toInt), param.map(_.toInt), after.map(_.toInt), replacement.map(_.toInt)))
 
-      println()
-    }
+        println()
+      }
 
-    Seq(before, param, after, replacement).exists(_.contains("\u0000")) || got == oracle
+      Seq(before, param, after, replacement).exists(_.contains("\u0000")) || got == oracle
   }
 }
