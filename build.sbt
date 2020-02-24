@@ -6,5 +6,6 @@ scalaVersion := "2.13.1"
 
 libraryDependencies ++= Seq(
   "org.playframework.anorm" %% "anorm" % "2.6.5",
-  "org.scalatest" %% "scalatest" % "3.1.1" % "test"
+  "org.scalatest" %% "scalatest" % "3.1.1" % "test",
+  "org.scalacheck" %% "scalacheck" % "1.14.1" % "test"
 )
