@@ -25,10 +25,15 @@ object SQLFragmentSpec extends Properties("SQLFragment") with Matchers {
     val got = runner.run(query)
     val oracle = before + replacement + after
     if(got != oracle) {
-      println(got.map(_.toInt))
-      println("vs")
-      println(oracle.map(_.toInt))
+      print(got.map(_.toInt))
+      print(" vs ")
+      print(oracle.map(_.toInt))
+      print(" with input ")
+      print((before.map(_.toInt), param.map(_.toInt), after.map(_.toInt), replacement.map(_.toInt)))
+
+      println()
     }
-    before.contains("\u0000") || param.contains("\u0000") || after.contains("\u0000") || replacement.contains("\u0000") || got == oracle
+
+    got == oracle
   }
 }

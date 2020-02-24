@@ -28,7 +28,7 @@ case class SQLFragment(query: String, parameters: Params) {
     }
 
     val res = SQLFragment(
-      List(ourQueryRenamed.trim, that.query.trim).mkString(" "),
+      List(ourQueryRenamed, that.query).mkString(" "),
       ourParamsRenamed ++ that.parameters
     )
     println("step " + res + "\n")
