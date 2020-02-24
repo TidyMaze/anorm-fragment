@@ -7,7 +7,7 @@ object StringUtils {
     replacements.toList.sortBy {
       case (k,v) => k.length
     }.reverse.foldLeft(raw){
-      case (cur, (key, value)) => cur.replaceAll(key, value)
+      case (cur, (key, value)) => cur.replace(key, value)
     }
 
   def replaceMapValuesSafe(replacements: Map[String, String], raw: String): String = {

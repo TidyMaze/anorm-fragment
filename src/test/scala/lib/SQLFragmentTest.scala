@@ -22,7 +22,7 @@ class SQLFragmentTest extends AnyFlatSpec with Matchers {
 
     val runner = new SQLRunner()
 
-    runner.run(query) mustBe "SqlQuery(select * from Country c join CountryLanguage l on l.CountryCode = c.Code where l.Language = {fr} and c.Population >= {2000} order by c.Population desc limit 1, timeout = None, fetchSize = None)"
+    runner.run(query) mustBe "select * from Country c join CountryLanguage l on l.CountryCode = c.Code where l.Language = {fr} and c.Population >= {2000} order by c.Population desc limit 1"
   }
 
   "An SQLFragment" should "replace params with same name in different fragments" in {
@@ -52,7 +52,7 @@ class SQLFragmentTest extends AnyFlatSpec with Matchers {
 
     //query.parameters mustBe Map[String, ParameterValue]("param" -> 10, "param_1" -> population, "param_1_1" -> "fr")
 
-    res mustBe "SqlQuery(select * from Country c join CountryLanguage l on l.CountryCode = c.Code where l.Language = {fr} and c.Population >= {2000} order by c.Population desc limit {10}, timeout = None, fetchSize = None)"
+    res mustBe "select * from Country c join CountryLanguage l on l.CountryCode = c.Code where l.Language = {fr} and c.Population >= {2000} order by c.Population desc limit {10}"
   }
 
   "An SQLFragment" should "replace params with different names" in {
@@ -78,7 +78,7 @@ class SQLFragmentTest extends AnyFlatSpec with Matchers {
 
     //query.parameters mustBe Map[String, ParameterValue]("lol" -> 10, "population" -> population, "lang" -> "fr")
 
-    res mustBe "SqlQuery(select * from Country c join CountryLanguage l on l.CountryCode = c.Code where l.Language = {fr} and c.Population >= {2000} order by c.Population desc limit {10}, timeout = None, fetchSize = None)"
+    res mustBe "select * from Country c join CountryLanguage l on l.CountryCode = c.Code where l.Language = {fr} and c.Population >= {2000} order by c.Population desc limit {10}"
   }
 
   "generateDistinctName" should "build a correct map with same name params" in {
