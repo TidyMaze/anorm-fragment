@@ -1,7 +1,6 @@
 package lib
 
 import lib.SQLFragment.Params
-import lib.SQLFragmentSpec.runner
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.must.Matchers
 
@@ -89,30 +88,5 @@ class SQLFragmentTest extends AnyFlatSpec with Matchers {
     val oracle: Map[String, String] = Map("toto" -> "toto_1")
 
     SQLFragment.generateDistinctName(invariant)(toRename) mustBe oracle
-  }
-
-  "sql" should "blabla" in {
-    val before = "before"
-    val param  = "e"
-    val after = "after"
-    val replacement = "replacement"
-
-    val query = SQLFragment(before + StringUtils.addDelimiters(param) + after, Map(
-      param -> replacement,
-    ))
-
-    val got = runner.run(query)
-    val oracle = before + replacement + after
-    if (got != oracle) {
-      print(got.map(_.toInt))
-      print(" vs ")
-      print(oracle.map(_.toInt))
-      print(" with input ")
-      print((before.map(_.toInt), param.map(_.toInt), after.map(_.toInt), replacement.map(_.toInt)))
-
-      println()
-    }
-
-    got mustBe oracle
   }
 }
