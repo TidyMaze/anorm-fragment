@@ -33,4 +33,6 @@ object StringUtils {
 
     step2
   }
+
+  def addDelimiters(raw: String) = s"{$raw}"
 }

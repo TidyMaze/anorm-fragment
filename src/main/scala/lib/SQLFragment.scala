@@ -20,7 +20,9 @@ case class SQLFragment(query: String, parameters: Params) {
 
   def +(that: SQLFragment) = {
 
-    val whatToRenameInOurFragment = SQLFragment.generateDistinctName(that.parameters)(this.parameters)
+    val whatToRenameInOurFragment = SQLFragment.generateDistinctName(that.parameters)(this.parameters).map {
+      case (key, value) => (addDelimiters(key), addDelimiters(value))
+    }
 
     val ourQueryRenamed = replaceMapValuesSafe(whatToRenameInOurFragment, query)
     val ourParamsRenamed: Params = parameters.map {
